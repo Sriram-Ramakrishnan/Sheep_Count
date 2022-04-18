@@ -1,0 +1,31 @@
+// Sheep Count Code:
+//
+int count = 0;
+int led = 13;
+int IR_Out = 2,IR_Gate = 3,IR_In = 4;
+void setup()
+{
+  pinMode(led,OUTPUT);
+  pinMode(IR_In,INPUT);
+  pinMode(IR_Gate,INPUT);
+  pinMode(IR_Out,INPUT);
+  
+  Serial.begin(9600);// Amount of bits/sec 
+}
+
+void loop()
+{
+  int status2 =	digitalRead(IR_Out);
+  int status3=	digitalRead(IR_Gate);
+  int status4 =	digitalRead(IR_In);
+  if ((IR_Gate!=1)&&(IR_In!=1)&&(IR_Out==1)){
+    count = count+1;
+  	}       
+  else if ((IR_Gate!=1)&&(IR_In==1)&&(IR_Out!=1)){
+    count = count-1;
+  	}
+  else{
+    delay(1000); // 1 second delay until the condition
+    digitalWrite(led,HIGH); // LED will light up until the sheep passes
+  }
+}
